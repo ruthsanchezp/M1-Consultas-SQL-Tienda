@@ -1,9 +1,12 @@
 
+Consultas SQL
+
+
 1.	¿Cuáles son los datos de almacenes que tiene la compañía? Se necesita:
 
 a.	Identificador del almacén.
 b.	Nombre del almacén.
-c.	Nombre de la ciudad, país y región donde está ubicado. */
+c.	Nombre de la ciudad, país y región donde está ubicado. 
 
 
 2.	¿Cuál es el producto que tiene más stock en Asia?
