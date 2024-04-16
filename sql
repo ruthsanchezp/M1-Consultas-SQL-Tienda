@@ -18,30 +18,33 @@ INNER JOIN regions r ON c.region_id = r.region_id
 
 //Consulta SQL 
 
-SELECT p.product_name, SUM(i.quantity) as quantity 
-FROM products p 
-INNER JOIN inventories i ON p.product_id = i.product_id 
-INNER JOIN warehouses w ON i.warehouse_id = w.warehouse_id 
-INNER JOIN locations l ON w.location_id = l.location_id 
-INNER JOIN countries c ON l.country_id = c.country_id 
-INNER JOIN regions r ON c.region_id = r.region_id 
-WHERE r.region_name = 'Asia' 
-GROUP BY p.product_name
-ORDER BY quantity DESC;
+select p.product_id, p.product_name, sum(i.quantity) as total
+from inventories i
+inner join products p on p.product_id = i.product_id
+inner join warehouses w on w.warehouse_id = i.warehouse_id
+inner join locations l on l.location_id = w.location_id
+inner join countries c on c.country_id = l.country_id
+inner join regions r on r.region_id = c.region_id
+where r.region_name = 'Asia'
+group by p.product_id, p.product_name
+order by total desc
 
+  
 //3.	¿Cuál es el producto que ha vendido más unidades durante 2016?
 
 //Consulta SQL 
 
-SELECT p.product_name, SUM(oi.quantity) AS quantity
-FROM products p
-INNER JOIN order_items oi ON p.product_id = oi.product_id
-INNER JOIN orders o ON oi.order_id = o.order_id
-WHERE EXTRACT(YEAR FROM o.order_date) = 2016
-AND o.status = 'Shipped'
-GROUP BY p.product_name
-ORDER BY quantity DESC;
 
+SELECT P.PRODUCT_ID, P.PRODUCT_NAME, SUM(OI.QUANTITY) AS cantidad
+FROM PRODUCTS P
+INNER JOIN ORDER_ITEMS OI ON OI.PRODUCT_ID=P.PRODUCT_ID
+INNER JOIN ORDERS O ON O.ORDER_ID=OI.ORDER_ID
+WHERE O.ORDER_DATE>=TO_DATE('20160101','YYYYMMDD') AND O.ORDER_DATE<TO_DATE( '20170101','YYYYMMDD')
+AND O.STATUS = 'Shipped'
+GROUP BY P.PRODUCT_ID, P.PRODUCT_NAME
+ORDER BY cantidad DESC
+
+  
 
 //4.	¿Cuál es la categoría de productos que ha vendido más unidades durante 2017?
 
