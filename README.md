@@ -1,4 +1,4 @@
-# Consultas SQL
+# Consultas SQL en Oracle
 
 En este documento se presentan una serie de consultas SQL que se pueden realizar sobre la base de datos de la compañía.
 
