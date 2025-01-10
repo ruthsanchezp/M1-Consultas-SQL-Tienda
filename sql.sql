@@ -28,7 +28,6 @@ inner join regions r on r.region_id = c.region_id
 where r.region_name = 'Asia'
 group by p.product_id, p.product_name
 order by total desc
-
   
 //3.	¿Cuál es el producto que ha vendido más unidades durante 2016?
 
@@ -36,14 +35,13 @@ order by total desc
 
 
 SELECT P.PRODUCT_ID, P.PRODUCT_NAME, SUM(OI.QUANTITY) AS cantidad
-FROM PRODUCTS P
-INNER JOIN ORDER_ITEMS OI ON OI.PRODUCT_ID=P.PRODUCT_ID
-INNER JOIN ORDERS O ON O.ORDER_ID=OI.ORDER_ID
-WHERE O.ORDER_DATE>=TO_DATE('20160101','YYYYMMDD') AND O.ORDER_DATE<TO_DATE( '20170101','YYYYMMDD')
-AND O.STATUS = 'Shipped'
+  FROM PRODUCTS P
+ INNER JOIN ORDER_ITEMS OI ON OI.PRODUCT_ID=P.PRODUCT_ID
+ INNER JOIN ORDERS O ON O.ORDER_ID=OI.ORDER_ID
+ WHERE O.ORDER_DATE>=TO_DATE('20160101','YYYYMMDD') AND O.ORDER_DATE<TO_DATE( '20170101','YYYYMMDD')
+   AND O.STATUS = 'Shipped'
 GROUP BY P.PRODUCT_ID, P.PRODUCT_NAME
 ORDER BY cantidad DESC
-
   
 
 //4.	¿Cuál es la categoría de productos que ha vendido más unidades durante 2017?
